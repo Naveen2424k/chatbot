@@ -14,6 +14,8 @@ An AI-powered, production-ready recruiter dashboard, resume analyzer, and conver
 
 The system implements a **hybrid storage architecture**: relational metadata is tracked in a SQLite database, while document embeddings are stored in ChromaDB. This allows the recruiter to perform both exact database filtering (e.g., matching experience years) and semantic search (e.g., identifying conceptual skills) simultaneously.
 
+![RAG System Architecture](assets/rag_architecture.png)
+
 ```mermaid
 flowchart TD
     subgraph Ingestion Pipeline [1. Ingestion & Indexing Pipeline]
