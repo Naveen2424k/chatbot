@@ -1,0 +1,37 @@
+# Virtual environment
+resume-rag/venv/
+resume-rag/.venv/
+resume-rag/env/
+resume-rag/ENV/
+
+# Python cache and temporary files
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/.pytest_cache/
+**/.ipynb_checkpoints/
+
+# Environment variables
+resume-rag/.env
+resume-rag/.env.local
+resume-rag/.env.development
+resume-rag/.env.test
+resume-rag/.env.production
+
+# Local database and vector store files
+resume-rag/chroma_db/
+resume-rag/database/*.db
+resume-rag/database/metadata.db
+
+# User uploaded files
+resume-rag/uploads/
+
+# IDE files
+.vscode/
+**/__pycache__/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
