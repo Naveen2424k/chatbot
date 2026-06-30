@@ -43,62 +43,78 @@ st.set_page_config(
 # Custom Premium CSS Styling
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     
     html, body, [class*="css"], .stApp {
-        font-family: 'Outfit', sans-serif;
+        font-family: 'Inter', sans-serif;
     }
     
-    /* Header Gradient */
+    /* Sleek Enterprise Top Header */
     .main-header {
-        background: linear-gradient(135deg, #4A154B 0%, #6C63FF 50%, #0F0C20 100%);
-        padding: 2rem;
+        background: radial-gradient(circle at top left, #1e1b4b 0%, #0f172a 100%);
+        padding: 2.2rem 2.5rem;
         border-radius: 16px;
         color: white;
         margin-bottom: 2rem;
-        box-shadow: 0 10px 30px rgba(108, 99, 255, 0.25);
-        text-align: center;
+        border: 1px solid #312e81;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .main-header-text {
+        flex: 1;
     }
     .main-header h1 {
         font-weight: 700;
         margin: 0;
-        font-size: 2.6rem;
-        background: linear-gradient(to right, #ffffff, #e0e0ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        font-size: 2.2rem;
+        letter-spacing: -0.5px;
+        color: #ffffff;
     }
     .main-header p {
-        font-weight: 300;
-        margin-top: 0.5rem;
-        font-size: 1.1rem;
-        color: #e2d9f3;
+        font-weight: 400;
+        margin-top: 0.4rem;
+        font-size: 1.05rem;
+        color: #94a3b8;
+    }
+    .badge-premium {
+        background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        color: white;
+        padding: 0.4rem 1rem;
+        border-radius: 9999px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
     }
     
-    /* Card Styles */
+    /* Sleek SaaS Metric Cards */
     .metric-card {
-        background: #1E1E38;
-        border: 1px solid #3F3D56;
+        background: #1e293b;
+        border: 1px solid #334155;
         border-radius: 12px;
-        padding: 1.25rem;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-        transition: transform 0.2s ease-in-out;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transition: all 0.2s ease-in-out;
     }
     .metric-card:hover {
-        transform: translateY(-3px);
-        border-color: #6C63FF;
+        transform: translateY(-2px);
+        border-color: #6366f1;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
     }
     .metric-val {
         font-size: 2.2rem;
         font-weight: 700;
-        color: #6C63FF;
+        color: #f8fafc;
         margin-bottom: 0.2rem;
+        font-feature-settings: "tnum";
     }
     .metric-title {
-        font-size: 0.85rem;
-        color: #B3B3D4;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #94a3b8;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 1px;
     }
     
     /* Sidebar styling tweaks */
@@ -106,13 +122,29 @@ st.markdown("""
         background-color: #0E1117;
     }
     
-    /* Subheaders styling */
+    /* Section Headers */
     .section-title {
+        font-size: 1.3rem;
         font-weight: 600;
-        color: #6C63FF;
-        border-bottom: 2px solid #6C63FF;
-        padding-bottom: 0.3rem;
-        margin-bottom: 1rem;
+        color: #f8fafc;
+        border-left: 4px solid #6366f1;
+        padding-left: 0.75rem;
+        margin-bottom: 1.2rem;
+        margin-top: 0.5rem;
+    }
+    
+    /* Skill Pills styling */
+    .skill-pill {
+        background-color: #1e293b;
+        color: #e2e8f0;
+        padding: 0.25rem 0.65rem;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        display: inline-block;
+        margin-right: 0.4rem;
+        margin-bottom: 0.4rem;
+        border: 1px solid #334155;
+        font-weight: 500;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -134,27 +166,41 @@ db_manager = DBManager(DB_PATH)
 
 # ----------------- SIDEBAR -----------------
 with st.sidebar:
-    st.image("https://img.icons8.com/color/96/resume.png", width=80)
-    st.title("Settings & Uploads")
+    st.markdown("""
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #1e293b;">
+            <div style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); padding: 0.55rem; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM12 6C13.66 6 15 7.34 15 9C15 10.66 13.66 12 12 12C10.34 12 9 10.66 9 9C9 7.34 10.34 6 12 6ZM18 18H6V17C6 15 10 13.9 12 13.9C14 13.9 18 15 18 17V18Z" fill="white"/>
+                </svg>
+            </div>
+            <span style="font-size: 1.3rem; font-weight: 700; color: #ffffff; letter-spacing: -0.5px;">TalentSync RAG</span>
+        </div>
+    """, unsafe_allow_html=True)
     
-    # 1. API Key Input
+    # 1. API Key Status
     api_key_env = os.environ.get("GOOGLE_API_KEY", "")
-    api_key_input = st.text_input(
-        "Google API Key", 
-        type="password", 
-        value=api_key_env,
-        help="Provide your Gemini API key here if it's not set in the environment variables."
-    )
+    api_key = api_key_env
     
-    api_key = api_key_input if api_key_input else api_key_env
-    
-    if not api_key:
-        st.warning("⚠️ Please provide a Google API Key to enable AI features.")
+    if api_key:
+        st.markdown("""
+            <div style="background-color: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); padding: 0.5rem 0.75rem; border-radius: 8px; font-size: 0.8rem; color: #34d399; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; font-weight: 500;">
+                <span style="display: inline-block; width: 6px; height: 6px; background-color: #34d399; border-radius: 50%; box-shadow: 0 0 8px #34d399;"></span>
+                Gemini LLM Connected
+            </div>
+        """, unsafe_allow_html=True)
+    else:
+        st.markdown("""
+            <div style="background-color: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); padding: 0.5rem 0.75rem; border-radius: 8px; font-size: 0.8rem; color: #f87171; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; font-weight: 500;">
+                <span style="display: inline-block; width: 6px; height: 6px; background-color: #f87171; border-radius: 50%;"></span>
+                LLM Offline (Set GOOGLE_API_KEY)
+            </div>
+        """, unsafe_allow_html=True)
+        st.error("⚠️ GOOGLE_API_KEY environment variable not found in system environment or .env file.")
 
     st.markdown("---")
     
     # 2. Resumes Upload
-    st.subheader("1. Ingest Resumes")
+    st.markdown("<h4 style='font-size:0.85rem; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.75rem;'>1. Ingest Resumes</h4>", unsafe_allow_html=True)
     uploaded_resumes = st.file_uploader(
         "Upload Resumes (PDF, DOCX)", 
         type=["pdf", "docx"], 
@@ -214,7 +260,7 @@ with st.sidebar:
     st.markdown("---")
     
     # 3. Job Description Input
-    st.subheader("2. Job Description (JD)")
+    st.markdown("<h4 style='font-size:0.85rem; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.75rem;'>2. Job Description (JD)</h4>", unsafe_allow_html=True)
     jd_input_method = st.radio(
         "JD Input Method",
         ["Upload JD PDF", "Paste JD Text"],
@@ -285,7 +331,7 @@ with st.sidebar:
     st.markdown("---")
     
     # 4. Management & Reset Utilities
-    st.subheader("System Tools")
+    st.markdown("<h4 style='font-size:0.85rem; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.75rem;'>System Tools</h4>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
         if st.button("Clear DB", type="secondary", use_container_width=True):
@@ -306,11 +352,16 @@ with st.sidebar:
 
 # ----------------- MAIN INTERFACE -----------------
 
-# Gradient Header
+# Sleek Enterprise Header
 st.markdown("""
 <div class="main-header">
-    <h1>💼 AI Resume Analyzer & RAG Chatbot</h1>
-    <p>Upload resumes, search semantic patterns, compare matches with JDs, and chat interactively about candidates.</p>
+    <div class="main-header-text">
+        <h1>TalentSync Recruiter Portal</h1>
+        <p>Analyze candidate resumes, query profiles semantically, and match against job descriptions with AI insights.</p>
+    </div>
+    <div class="badge-premium">
+        ✨ AI Engine Enabled
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -370,9 +421,9 @@ if all_candidates:
 
 # Tabs
 tab_chat, tab_leaderboard, tab_ats = st.tabs([
-    "💬 Recruiter Chat (RAG)", 
-    "🏆 Candidate Leaderboard", 
-    "📊 ATS Match Analytics"
+    "💬 Recruiter AI Assistant", 
+    "🏆 Candidate Index & Metrics", 
+    "📊 Job Matching Analytics"
 ])
 
 # ----------------- TAB 1: RECRUITER CHAT (RAG) -----------------
@@ -482,33 +533,82 @@ with tab_leaderboard:
         
         # Details view for individual candidate
         st.markdown("<br>", unsafe_allow_html=True)
-        st.subheader("Detailed Candidate Profile Viewer")
+        st.markdown('<h3 class="section-title">Detailed Candidate Profile Viewer</h3>', unsafe_allow_html=True)
         selected_cand_name = st.selectbox("Select a candidate to view full details:", df_sorted['name'].unique())
         
         if selected_cand_name:
             cand_detail = df_sorted[df_sorted['name'] == selected_cand_name].iloc[0]
             
+            # Create a card-like layout for candidate details
+            st.markdown(f"""
+            <div style="background-color: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
+                    <div>
+                        <h3 style="margin: 0; color: #ffffff; font-size: 1.6rem; font-weight: 700;">{cand_detail['name']}</h3>
+                        <p style="margin: 0.25rem 0 0 0; color: #94a3b8; font-size: 0.95rem;">📧 {cand_detail['email']}</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <span style="background-color: rgba(99, 102, 241, 0.12); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3); padding: 0.4rem 0.8rem; border-radius: 8px; font-weight: 600; font-size: 0.9rem;">
+                            Resume Score: {cand_detail['resume_score']}/100
+                        </span>
+                    </div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
             col_d1, col_d2 = st.columns(2)
             with col_d1:
-                st.markdown(f"**Name:** {cand_detail['name']}")
-                st.markdown(f"**Email:** {cand_detail['email']}")
-                st.markdown(f"**Total Experience (Years):** {cand_detail['experience_years']} years")
-                st.markdown(f"**Education:** {cand_detail['education']}")
+                # Experience Summary Card
+                st.markdown(f"""
+                <div style="background-color: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.25rem; min-height: 110px;">
+                    <h5 style="margin: 0 0 0.5rem 0; color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Work Experience</h5>
+                    <p style="margin: 0; font-size: 1.4rem; font-weight: 700; color: #f8fafc;">{cand_detail['experience_years']} years</p>
+                </div>
+                """, unsafe_allow_html=True)
             with col_d2:
-                st.markdown(f"**Resume Quality Score:** {cand_detail['resume_score']}/100")
-                if is_jd_available and pd.notna(cand_detail['match_percentage']):
-                    st.markdown(f"**JD Match Percentage:** {cand_detail['match_percentage']}%")
-                    st.markdown(f"**JD ATS Fit Score:** {cand_detail['ats_score']}/100")
-                st.markdown(f"**Document Filename:** {cand_detail['id']}")
-            
-            st.markdown(f"**Executive Profile Summary:**")
-            st.info(cand_detail['summary'])
-            
-            st.markdown(f"**Parsed Key Skills:**")
-            st.write(cand_detail['skills'])
-            
-            st.markdown(f"**Experience Details:**")
-            st.write(cand_detail['experience_details'])
+                # Education Card
+                st.markdown(f"""
+                <div style="background-color: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.25rem; min-height: 110px;">
+                    <h5 style="margin: 0 0 0.5rem 0; color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Education</h5>
+                    <p style="margin: 0; font-size: 0.95rem; font-weight: 500; color: #e2e8f0; line-height: 1.4;">{cand_detail['education']}</p>
+                </div>
+                """, unsafe_allow_html=True)
+
+            if is_jd_available and pd.notna(cand_detail['match_percentage']):
+                col_jd1, col_jd2 = st.columns(2)
+                with col_jd1:
+                    st.markdown(f"""
+                    <div style="background-color: #1e1b4b; border: 1px solid #312e81; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.25rem;">
+                        <h5 style="margin: 0 0 0.5rem 0; color: #c7d2fe; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">JD Match Compatibility</h5>
+                        <p style="margin: 0; font-size: 1.4rem; font-weight: 700; color: #818cf8;">{cand_detail['match_percentage']}%</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                with col_jd2:
+                    st.markdown(f"""
+                    <div style="background-color: #1e1b4b; border: 1px solid #312e81; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.25rem;">
+                        <h5 style="margin: 0 0 0.5rem 0; color: #c7d2fe; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">JD ATS Fit Score</h5>
+                        <p style="margin: 0; font-size: 1.4rem; font-weight: 700; color: #818cf8;">{cand_detail['ats_score']}/100</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+
+            st.markdown(f"""
+            <div style="background-color: #0f172a; border: 1px solid #1e293b; padding: 1.2rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                <h5 style="margin: 0 0 0.5rem 0; color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Executive Summary</h5>
+                <p style="margin: 0; color: #e2e8f0; font-size: 0.95rem; line-height: 1.6;">{cand_detail['summary']}</p>
+            </div>
+            """, unsafe_allow_html=True)
+
+            st.markdown(f"**Parsed Key Skills**")
+            skills_list = [s.strip() for s in cand_detail['skills'].split(",") if s.strip()]
+            skills_html = "".join([f'<span class="skill-pill">{s}</span>' for s in skills_list])
+            st.markdown(f'<div style="margin-top: 0.5rem; margin-bottom: 1.5rem;">{skills_html}</div>', unsafe_allow_html=True)
+
+            st.markdown(f"**Detailed Work History Summary**")
+            st.markdown(f"""
+            <div style="background-color: #0f172a; border: 1px solid #1e293b; padding: 1.2rem; border-radius: 8px; color: #e2e8f0; font-size: 0.95rem; line-height: 1.6;">
+                {cand_detail['experience_details']}
+            </div>
+            """, unsafe_allow_html=True)
 
 # ----------------- TAB 3: ATS MATCH ANALYTICS -----------------
 with tab_ats:
@@ -563,23 +663,35 @@ with tab_ats:
                 }.get(match_info.get('recommendation'), "⚪ " + str(match_info.get('recommendation')))
                 
                 with st.expander(f"📋 {row['name']} — Match: {row['match_percentage']}% | Fit Score: {row['ats_score']}/100"):
-                    st.markdown(f"#### Recommendation: {rec_color}")
-                    st.write(match_info.get('explanation', ''))
+                    st.markdown(f"**Recommendation:** {rec_color}")
+                    st.markdown(f"""
+                    <div style="background-color: #1e293b; border-left: 4px solid #6366f1; padding: 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1.25rem;">
+                        <p style="margin: 0; color: #e2e8f0; font-size: 0.95rem; line-height: 1.5;">{match_info.get('explanation', '')}</p>
+                    </div>
+                    """, unsafe_allow_html=True)
                     
                     col_str, col_gap = st.columns(2)
                     with col_str:
-                        st.markdown("**⭐ Core Strengths & Matches:**")
+                        st.markdown("<h5 style='font-size:0.9rem; color:#34d399; margin-bottom:0.5rem; font-weight:600;'>⭐ Core Strengths & Matches</h5>", unsafe_allow_html=True)
                         strengths = match_info.get('strengths', [])
                         if strengths:
                             for s in strengths:
-                                st.markdown(f"- {s}")
+                                st.markdown(f"""
+                                <div style="display: flex; gap: 0.5rem; align-items: start; margin-bottom: 0.4rem; font-size: 0.9rem; color: #e2e8f0;">
+                                    <span style="color: #34d399;">✓</span> <span>{s}</span>
+                                </div>
+                                """, unsafe_allow_html=True)
                         else:
                             st.write("*No notable strengths extracted.*")
                     with col_gap:
-                        st.markdown("**⚠️ Qualifications & Keyword Gaps:**")
+                        st.markdown("<h5 style='font-size:0.9rem; color:#f87171; margin-bottom:0.5rem; font-weight:600;'>⚠️ Qualifications & Keyword Gaps</h5>", unsafe_allow_html=True)
                         gaps = match_info.get('gaps', [])
                         if gaps:
                             for g in gaps:
-                                st.markdown(f"- {g}")
+                                st.markdown(f"""
+                                <div style="display: flex; gap: 0.5rem; align-items: start; margin-bottom: 0.4rem; font-size: 0.9rem; color: #e2e8f0;">
+                                    <span style="color: #f87171;">✦</span> <span>{g}</span>
+                                </div>
+                                """, unsafe_allow_html=True)
                         else:
                             st.write("*No key gaps identified.*")
